@@ -1,10 +1,8 @@
 # Katalog UMKM + Order WhatsApp
 
-Template workshop vibe coding Creative Hub App Talent (CHAT) 2026. Repo ini berisi tampilan aplikasi katalog UMKM; tugasmu merangkainya menjadi sistem utuh dengan bantuan AI: database, login admin, keamanan, dan pemesanan lewat WhatsApp.
+Template workshop vibe coding Creative Hub App Talent (CHAT) 2026. Repo ini berisi aplikasi katalog UMKM Toko Primar yang terhubung langsung ke Supabase, memiliki login admin, keamanan terproteksi, dan pemesanan otomatis lewat WhatsApp.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FUSERNAME%2Fkatalog-umkm)
-
-> Untuk pengelola repo: ganti `USERNAME` pada link tombol di atas dengan akun GitHub pemilik repo template ini.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FGitHup1-commit%2Fprimar)
 
 ## Langkah awal
 
@@ -16,8 +14,8 @@ Template workshop vibe coding Creative Hub App Talent (CHAT) 2026. Repo ini beri
 6. **Clone repo ke laptop.**
 
    ```bash
-   git clone https://github.com/<akunmu>/<nama-repo>.git
-   cd <nama-repo>
+   git clone https://github.com/GitHup1-commit/primar.git
+   cd primar
    npm install
    ```
 
@@ -76,7 +74,15 @@ Urutan yang disarankan: US-01, US-02, US-03, US-04, US-05, US-06, lalu fitur bon
 
 ## Tentang aplikasi ini
 
-- **Nama usaha:**
-- **Pembuat:**
-- **Link aplikasi:**
-- **Fitur bonus yang dikerjakan:**
+- **Nama usaha:** Toko Primar
+- **Pembuat:** Mahfudh Al Rafif
+- **Link aplikasi:** https://primar-kohl.vercel.app/
+- **Penjelasan aplikasi:** Aplikasi web katalog produk UMKM Toko Primar yang memungkinkan pelanggan melihat katalog dan detail produk yang disajikan secara server-side dari database Supabase, serta memesan produk secara langsung ke penjual via WhatsApp dengan pesan otomatis terisi nama dan harga produk. Aplikasi juga menyediakan area dashboard admin terlindungi untuk mengelola sesi dan mengubah password akun toko.
+- **Fitur wajib yang sudah diimplementasikan:**
+  - **US-01 (Katalog dari database):** Mengambil daftar produk dari tabel `produk` di Supabase pada sisi server, menampilkannya dengan format rupiah, dan menangani state kosong/error.
+  - **US-02 (Detail produk):** Halaman dinamis `/produk/[id]` menyajikan data produk dari database dan memanggil `notFound()` jika produk tidak ada.
+  - **US-03 (Pesan via WhatsApp):** Tombol pemesanan WhatsApp otomatis mengarahkan ke nomor toko dengan pesan nama produk dan harga rupiah yang ter-encode.
+  - **US-04 (Login admin):** Autentikasi admin berbasis Supabase Auth dengan `@supabase/ssr` dan cookie, dilengkapi fitur login dan logout.
+  - **US-05 (Ganti password):** Fitur ganti password admin yang tervalidasi di server (minimal 8 karakter dan verifikasi konfirmasi).
+  - **US-06 (Proteksi halaman admin):** Proteksi seluruh rute admin via `proxy.js` Next.js 16 dan verifikasi autentikasi pada Server Action.
+- **Status fitur bonus:** Belum diimplementasikan. Dashboard admin saat ini dipertahankan strukturnya dan disiapkan untuk implementasi US-07 sampai US-10 setelah Tahap 15 selesai.
