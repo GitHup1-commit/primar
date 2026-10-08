@@ -3,6 +3,20 @@
 import { redirect } from "next/navigation";
 import { buatKoneksiSesiAdmin } from "@/lib/supabase";
 
+export async function periksaAdminLogin() {
+  const supabase = await buatKoneksiSesiAdmin();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return null;
+  }
+
+  return { supabase, user };
+}
+
 export async function loginAdmin(prevState, formData) {
   let email = "";
   let password = "";
@@ -68,20 +82,16 @@ export async function gantiPassword(prevState, formData) {
   }
 
   if (passStr !== konfStr) {
-    return { error: "Password baru dan konfirmasi password tidak sama." };
+    return { error: "Password baru dan konfirmasi password harus sama." };
   }
 
-  const supabase = await buatKoneksiSesiAdmin();
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError || !user) {
+  // Wajib periksa di server bahwa admin sudah login
+  const sesi = await periksaAdminLogin();
+  if (!sesi) {
     return { error: "Anda harus login terlebih dahulu untuk mengganti password." };
   }
 
-  const { error } = await supabase.auth.updateUser({
+  const { error } = await sesi.supabase.auth.updateUser({
     password: passStr,
   });
 
